@@ -1,0 +1,97 @@
+body{
+    background-color: rgb(121, 73, 150);
+    box-sizing: border-box;
+    display: flex;flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+header{
+    height: 8vh; width: 100%;
+    position: fixed; top:0;
+    background-color: rgb(114, 40, 156);
+}
+main{
+    width: 92vw; height:86vh;
+    margin-top: 11vh;
+    background-color: black;
+    border-radius: 1vh; border:0.3vh solid rgb(20, 17, 207);
+    display: flex;flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+}
+.imagenzona{
+    width: 96%; height: 96%;
+    overflow: hidden;
+    overflow-y: scroll;
+}
+section{
+    display: flex; flex-direction: column;
+    align-items: center;
+}
+.planeta{
+    display: flex;flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    border:1px solid white
+}
+.labelSelect{
+    display: flex;
+    justify-content: space-between;
+}
+p{
+    color: white;
+    font-size: 30px;
+}
+
+h1{
+    color: white;
+    font-size: 30px;
+}
+.inicial{
+    background-color: aqua;
+    height: 90%;
+    width: 60vw;
+    display: flex;flex-direction: column;
+    justify-content: space-evenly;
+}
+.principal{
+    overflow: hidden;
+    overflow-y: scroll;
+}
+.usuarios{
+    display: flex;flex-wrap: wrap;
+}
+.usuarios li{
+    width: 100px;
+    height: 100px;
+    display: flex;flex-direction: column;
+    align-items: center;
+}
+.usuarios li ion-icon{
+    font-size: 30px;
+    color: yellow;
+}
+
+
+.some{display: none;}
+
+.botoesConcorda button{
+    background-color: black;
+    border: 0;
+}
+.like{color: green;}
+.dislike{color:red}
+
+.contribua input{
+    background-color: black;
+    border: 1px solid white;
+    color:white
+}
+.contribua button{
+    background-color: black;
+    border:0
+}
+.contribua button ion-icon{
+    color: white;
+}
