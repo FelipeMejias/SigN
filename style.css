@@ -40,6 +40,20 @@ section{
 .labelSelect{
     display: flex;
     justify-content: space-between;
+    width: 100%;
+    align-items: center;
+    
+}
+.labelSelect p{
+    font-size: 30px;
+
+}
+.labelSelect select{
+    height: 35px;
+    background-color: #72289C;
+    color: white;
+    border: 2px solid #1411CF;
+    border-radius: 5px;
 }
 p{
     color: white;
@@ -59,11 +73,18 @@ h1{
 }
 
 .inicial{
-    background-color: aqua;
     height: 90%;
-    width: 60vw;
+    width: 60%;
     display: flex;flex-direction: column;
     justify-content: space-evenly;
+    align-items: center;
+}
+.inicial input{
+    height: 35px;
+    background-color: #72289C;
+    color: white;
+    border: 2px solid #1411CF;
+    border-radius: 5px;
 }
 .principal{
     overflow: hidden;
@@ -82,6 +103,14 @@ h1{
     font-size: 30px;
     color: yellow;
 }
+.inicial button{
+    width: 30%;
+    height: 35px;
+    background-color: #72289C;
+    color: white;
+    border: 2px solid #1411CF;
+    border-radius: 5px;
+}
 
 
 .some{display: none;}
@@ -96,7 +125,8 @@ h1{
 .contribua input{
     background-color: black;
     border: 1px solid white;
-    color:white
+    color:white;
+    width:50vw;height: 35px;
 }
 .contribua button{
     background-color: black;
@@ -104,6 +134,7 @@ h1{
 }
 .contribua button ion-icon{
     color: white;
+    font-size: 30px;
 }
 section ul{
     width: 35vw;

@@ -2,12 +2,12 @@ const signos=['Capricórnio','Aquário','Peixes','Áries','Touro','Gêmeos','Câ
 const planetas=['Sol','Ascendente','Lua']
 const frases=['Como é a personalidade do ser:','Como o ser se apresenta ao mundo:','Como o ser expressa seus sentimentos:']
 const usuarios=[]
-let eu=null;
+let usuarioProprio=null;
 let l1=null;
 let l2=null;
 let l3=null;
 let listaEsp=[]
-let lu=null
+
 const paginaCadastro=document.querySelector('.inicial')
 const paginaUsuarios=document.querySelector('.principal')
 const paginaSignos=document.querySelector('.signosUsuario')
@@ -16,7 +16,7 @@ jaSouAlguem()
 
 function jaSouAlguem(){
     quemSou()
-    if(eu!=null){
+    if(usuarioProprio!=null){
         carregarUsuarios()
         paginaUsuarios.classList.remove('some')
 
@@ -28,7 +28,7 @@ function jaSouAlguem(){
 function quemSou(){
     jsonUsuario = window.localStorage.getItem('usuario');
     const usuario = JSON.parse(jsonUsuario)
-    eu=usuario
+    usuarioProprio=usuario
 }
 
 function printarOpcoes(){
@@ -202,7 +202,7 @@ function enviar(planeta,signo){
         votos:1
     }
     const promessa=axios.post(`https://62102e943fd066f7b2307f7d.mockapi.io/${planeta}`,objeto)
-    promessa.then(()=>{console.log('foi')})
+    promessa.then(()=>{carregarEnvios(planeta,signo)})
 }
 
 function carregarEnvios(planeta,signo){
@@ -221,47 +221,59 @@ function carregarEnvios(planeta,signo){
         }
         if(texto !== null){document.querySelector(`.lista${planeta} l1`).innerHTML= `<p>${texto} <small>${maiorPorcentagem}%</small></p>`}
         let segundaMaior=0
+        let texto2=null
         for(let k=0;k<listaEsp.length;k++){
             const porcentagem=Math.round(listaEsp[k].likes*100/listaEsp[k].votos)
-            if(porcentagem>segundaMaior && porcentagem!=maiorPorcentagem && listaEsp[k].votos>maisVotado/10){segundaMaior=porcentagem; texto=listaEsp[k].texto;l2=listaEsp[k]}
+            if(porcentagem>segundaMaior && listaEsp[k].texto!=texto && listaEsp[k].votos>maisVotado/10){segundaMaior=porcentagem; texto2=listaEsp[k].texto;l2=listaEsp[k]}
         }
-        if(texto!=null){document.querySelector(`.lista${planeta} l2`).innerHTML=`<p>${texto} <small>${segundaMaior}%</small></p>`}
+        if(texto2!=null){document.querySelector(`.lista${planeta} l2`).innerHTML=`<p>${texto2} <small>${segundaMaior}%</small></p>`}
         let repescagem=0
+        let texto3=null
         for(let k=0;k<listaEsp.length;k++){
             const porcentagem=Math.round(listaEsp[k].likes*100/listaEsp[k].votos)
-            if(porcentagem>repescagem && porcentagem!=segundaMaior && porcentagem!=maiorPorcentagem){repescagem=porcentagem; texto=listaEsp[k].texto;l3=listaEsp[k]}
+            if(porcentagem>repescagem && listaEsp[k].texto!=texto && listaEsp[k].texto!=texto2){repescagem=porcentagem; texto3=listaEsp[k].texto;l3=listaEsp[k]}
         }
-        if(texto!=null){document.querySelector(`.lista${planeta} l3`).innerHTML=`<p>${texto} <small>${repescagem}%</small></p>`}
+        if(texto3!=null){document.querySelector(`.lista${planeta} l3`).innerHTML=`<p>${texto3} <small>${repescagem}%</small></p>`}
     })
     
 }
 
 function darLike(planeta,linha){
     let objeto={}
+    let id=null
     if(linha==1){
-        objeto={signo:l1.signo,texto:l1.texto,likes:l1.likes+1,votos:l1.votos+1}
+        objeto={signo:l1.signo,texto:l1.texto,likes:(l1.likes+1),votos:(l1.votos+1)}
+        id=l1.id
     }
     if(linha==2){
-        objeto={signo:l2.signo,texto:l2.texto,likes:l2.likes+1,votos:l2.votos+1}
+        objeto={signo:l2.signo,texto:l2.texto,likes:(l2.likes+1),votos:(l2.votos+1)}
+        id=l2.id
     }
     if(linha==3){
-        objeto={signo:l3.signo,texto:l3.texto,likes:l3.likes+1,votos:l3.votos+1}
+        objeto={signo:l3.signo,texto:l3.texto,likes:(l3.likes+1),votos:(l3.votos+1)}
+        id=l3.id
     }
+    axios.delete(`https://62102e943fd066f7b2307f7d.mockapi.io/${planeta}/${id}`)
     const promessa=axios.post(`https://62102e943fd066f7b2307f7d.mockapi.io/${planeta}`,objeto)
-    promessa.then(()=>{carregarEnvios(planeta,signo)})
+    promessa.then(()=>{carregarEnvios(planeta,objeto.signo)})
 }
 function darDislike(planeta,linha){
     let objeto={}
+    let id=null
     if(linha==1){
-        objeto={signo:l1.signo,texto:l1.texto,likes:l1.likes+1,votos:l1.votos+1}
+        objeto={signo:l1.signo,texto:l1.texto,likes:l1.likes,votos:(l1.votos + 1)}
+        id=l1.id
     }
     if(linha==2){
-        objeto={signo:l2.signo,texto:l2.texto,likes:l2.likes+1,votos:l2.votos+1}
+        objeto={signo:l2.signo,texto:l2.texto,likes:l2.likes,votos:(l2.votos + 1)}
+        id=l2.id
     }
     if(linha==3){
-        objeto={signo:l3.signo,texto:l3.texto,likes:l3.likes,votos:l3.votos+1}
+        objeto={signo:l3.signo,texto:l3.texto,likes:l3.likes,votos:(l3.votos + 1)}
+        id=l3.id
     }
+    axios.delete(`https://62102e943fd066f7b2307f7d.mockapi.io/${planeta}/${id}`)
     const promessa=axios.post(`https://62102e943fd066f7b2307f7d.mockapi.io/${planeta}`,objeto)
-    promessa.then(()=>{carregarEnvios(planeta,signo)})
+    promessa.then(()=>{carregarEnvios(planeta,objeto.signo)})
 }
 
