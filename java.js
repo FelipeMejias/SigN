@@ -1,5 +1,6 @@
 const signos=['Capricórnio','Aquário','Peixes','Áries','Touro','Gêmeos','Câncer','Leão','Virgem','Libra','Escorpião','Sagitário']
 const planetas=['Sol','Ascendente','Lua']
+const frases=['Como é a personalidade do ser:','Como o ser se apresenta ao mundo:','Como o ser expressa seus sentimentos:']
 const usuarios=[]
 let eu=null;
 let l1=null;
@@ -10,6 +11,7 @@ let lu=null
 const paginaCadastro=document.querySelector('.inicial')
 const paginaUsuarios=document.querySelector('.principal')
 const paginaSignos=document.querySelector('.signosUsuario')
+const paginaPlanetas=document.querySelector('.paginaPlanetas')
 jaSouAlguem()
 
 function jaSouAlguem(){
@@ -107,120 +109,87 @@ function printarPlanetasUsuario(objeto){
     for(let k=0;k<signos.length;k++){
         if(objeto.sol==signos[k]){
         paginaSignos.innerHTML+=`
-            <div class="planeta">
+            <div onclick="abrirPlaneta('Sol','${objeto.sol}',0)" class="planeta">
                 <section>
                     <h1>SOL</h1>
                     <h1>em</h1>
                     <h1>${signos[k]}</h1>
                 </section>
                 <div class="bolaPlaneta desenhoSol"></div>
-                <section>
-                    <h1>Como é a personalidade do ser:</h1>
-                    <ul class="listaSol">
-                        <l1></l1>
-                        <div class="botoesConcorda">
-                            <button onclick="darLike('Sol',1)" class="like"><ion-icon name="thumbs-up-outline"></ion-icon></button>
-                            <button onclick="darDislike('Sol',1)" class="dislike"><ion-icon name="thumbs-down-outline"></ion-icon></button>
-                        </div>
-                        <l2></l2>
-                        <div class="botoesConcorda">
-                            <button onclick="darLike('Sol','${signos[k]}',2)" class="like"><ion-icon name="thumbs-up-outline"></ion-icon></button>
-                            <button onclick="darDislike('Sol','${signos[k]}',2)" class="dislike"><ion-icon name="thumbs-down-outline"></ion-icon></button>
-                        </div>
-                        <l3></l3>
-                        <div class="botoesConcorda">
-                            <button onclick="darLike('Sol','${signos[k]}',3)" class="like"><ion-icon name="thumbs-up-outline"></ion-icon></button>
-                            <button onclick="darDislike('Sol','${signos[k]}',3)" class="dislike"><ion-icon name="thumbs-down-outline"></ion-icon></button>
-                        </div>
-                    </ul>
-                    <div class="contribua">
-                        <input class="inputSol" type="text" placeHolder="Contribua :)"></input>
-                        <button onclick="enviar('Sol','${signos[k]}')"><ion-icon name="paper-plane-outline"></ion-icon></button>
-                    </div>
-                </section>
+                
             </div>
             `
-            carregarEnvios('Sol',signos[k])
         }
     }
     for(let k=0;k<signos.length;k++){
         if(objeto.ascendente==signos[k]){
         paginaSignos.innerHTML+=`
-            <div class="planeta">
+            <div onclick="abrirPlaneta('Ascendente','${objeto.ascendente}',1)" class="planeta">
                 <section>
                     <h1>ASCENDENTE</h1>
                     <h1>em</h1>
                     <h1>${signos[k]}</h1>
                 </section>
                 <div class="bolaPlaneta desenhoAscendente"></div>
-                <section>
-                    <h1>Como o ser se apresenta aos outros:</h1>
-                    <ul class="listaAscendente">
-                        <l1></l1>
-                        <div class="botoesConcorda">
-                            <button onclick="darLike('Ascendente','${signos[k]}',1)" class="like"><ion-icon name="thumbs-up-outline"></ion-icon></button>
-                            <button onclick="darDislike('Ascendente','${signos[k]}',1)" class="dislike"><ion-icon name="thumbs-down-outline"></ion-icon></button>
-                        </div>
-                        <l2></l2>
-                        <div class="botoesConcorda">
-                            <button onclick="darLike('Ascendente','${signos[k]}',2)" class="like"><ion-icon name="thumbs-up-outline"></ion-icon></button>
-                            <button onclick="darDislike('Ascendente','${signos[k]}',2)" class="dislike"><ion-icon name="thumbs-down-outline"></ion-icon></button>
-                        </div>
-                        <l3></l3>
-                        <div class="botoesConcorda">
-                            <button onclick="darLike('Ascendente','${signos[k]}',3)" class="like"><ion-icon name="thumbs-up-outline"></ion-icon></button>
-                            <button onclick="darDislike('Ascendente','${signos[k]}',3)" class="dislike"><ion-icon name="thumbs-down-outline"></ion-icon></button>
-                        </div>
-                    </ul>
-                    <div class="contribua">
-                        <input class="inputAscendente" type="text" placeHolder="Contribua :)"></input>
-                        <button onclick="enviar('Ascendente','${signos[k]}')"><ion-icon name="paper-plane-outline"></ion-icon></button>
-                    </div>
-                </section>
+                
             </div>
             `
-            carregarEnvios('Ascendente',signos[k])
         }
     }
     for(let k=0;k<signos.length;k++){
         if(objeto.lua==signos[k]){
         paginaSignos.innerHTML+=`
-            <div class="planeta">
+            <div onclick="abrirPlaneta('Lua','${objeto.lua}',2)"class="planeta">
                 <section>
                     <h1>LUA</h1>
                     <h1>em</h1>
                     <h1>${signos[k]}</h1>
                 </section>
                 <div class="bolaPlaneta desenhoLua"></div>
-                <section>
-                    <h1>Como o ser expressa seus sentimentos:</h1>
-                    <ul class="listaLua">
-                        <l1 class="c1"></l1>
+                
+            </div>
+            `
+        }
+    }
+}
+
+function abrirPlaneta(planeta,signo,i){
+    paginaSignos.classList.add('some')
+    paginaPlanetas.classList.remove('some')
+    paginaPlanetas.innerHTML=`
+        <section>
+            <h1>${planeta}</h1>
+            <h1>em</h1>
+            <h1>${signo}</h1>
+            <div class="bolaPlaneta desenho${planeta}"></div>
+            </section>
+        
+        <section>
+                    <h1>${frases[i]}</h1>
+                    <ul class="lista${planeta}">
+                        <l1></l1>
                         <div class="botoesConcorda">
-                            <button onclick="darLike('Lua','${signos[k]}',1)" class="like"><ion-icon name="thumbs-up-outline"></ion-icon></button>
-                            <button onclick="darDislike('Lua',${signos[k]},1)" class="dislike"><ion-icon name="thumbs-down-outline"></ion-icon></button>
+                            <button onclick="darLike('${planeta}',1)" class="like"><ion-icon name="thumbs-up-outline"></ion-icon></button>
+                            <button onclick="darDislike('${planeta}',1)" class="dislike"><ion-icon name="thumbs-down-outline"></ion-icon></button>
                         </div>
                         <l2></l2>
                         <div class="botoesConcorda">
-                            <button onclick="darLike('Lua','${signos[k]}',2)" class="like"><ion-icon name="thumbs-up-outline"></ion-icon></button>
-                            <button onclick="darDislike('Lua',${signos[k]},2)" class="dislike"><ion-icon name="thumbs-down-outline"></ion-icon></button>
+                            <button onclick="darLike('${planeta}',2)" class="like"><ion-icon name="thumbs-up-outline"></ion-icon></button>
+                            <button onclick="darDislike('${planeta}',2)" class="dislike"><ion-icon name="thumbs-down-outline"></ion-icon></button>
                         </div>
                         <l3></l3>
                         <div class="botoesConcorda">
-                            <button onclick="darLike('Lua','${signos[k]}',3)" class="like"><ion-icon name="thumbs-up-outline"></ion-icon></button>
-                            <button onclick="darDislike('Lua',3)" class="dislike"><ion-icon name="thumbs-down-outline"></ion-icon></button>
+                            <button onclick="darLike('${planeta}',3)" class="like"><ion-icon name="thumbs-up-outline"></ion-icon></button>
+                            <button onclick="darDislike('${planeta}',3)" class="dislike"><ion-icon name="thumbs-down-outline"></ion-icon></button>
                         </div>
                     </ul>
                     <div class="contribua">
-                        <input class="inputLua" type="text" placeHolder="Contribua :)"></input>
-                        <button onclick="enviar('Lua','${signos[k]}')"><ion-icon name="paper-plane-outline"></ion-icon></button>
+                        <input class="input${planeta}" type="text" placeHolder="Contribua :)"></input>
+                        <button onclick="enviar('${planeta}','${signo}')"><ion-icon name="paper-plane-outline"></ion-icon></button>
                     </div>
                 </section>
-            </div>
-            `
-            carregarEnvios('Lua',signos[k])
-        }
-    }
+    `
+    carregarEnvios(planeta,signo)
 }
 
 
@@ -245,24 +214,24 @@ function carregarEnvios(planeta,signo){
         maisVotado=0
         for(let k=0;k<listaEsp.length;k++){if(listaEsp[k].votos>maisVotado){maisVotado=listaEsp[k].votos}}
         let maiorPorcentagem=0
-        let texto='opa'
+        let texto=null
         for(let k=0;k<listaEsp.length;k++){
             const porcentagem=Math.round(listaEsp[k].likes*100/listaEsp[k].votos)
             if(porcentagem>maiorPorcentagem && listaEsp[k].votos>maisVotado/3){maiorPorcentagem=porcentagem; texto=listaEsp[k].texto;l1=listaEsp[k]}
         }
-        if(texto !== null){document.querySelector(`.lista${planeta} l1`).innerHTML= `<p>${texto}--${maiorPorcentagem}%--</p>`}
+        if(texto !== null){document.querySelector(`.lista${planeta} l1`).innerHTML= `<p>${texto} <small>${maiorPorcentagem}%</small></p>`}
         let segundaMaior=0
         for(let k=0;k<listaEsp.length;k++){
             const porcentagem=Math.round(listaEsp[k].likes*100/listaEsp[k].votos)
             if(porcentagem>segundaMaior && porcentagem!=maiorPorcentagem && listaEsp[k].votos>maisVotado/10){segundaMaior=porcentagem; texto=listaEsp[k].texto;l2=listaEsp[k]}
         }
-        if(texto!=null){document.querySelector(`.lista${planeta} l2`).innerHTML=`<p>${texto}--${maiorPorcentagem}%--</p>`}
+        if(texto!=null){document.querySelector(`.lista${planeta} l2`).innerHTML=`<p>${texto} <small>${segundaMaior}%</small></p>`}
         let repescagem=0
         for(let k=0;k<listaEsp.length;k++){
             const porcentagem=Math.round(listaEsp[k].likes*100/listaEsp[k].votos)
             if(porcentagem>repescagem && porcentagem!=segundaMaior && porcentagem!=maiorPorcentagem){repescagem=porcentagem; texto=listaEsp[k].texto;l3=listaEsp[k]}
         }
-        if(texto!=null){document.querySelector(`.lista${planeta} l3`).innerHTML=texto + + `--${segundaMaior}%--`}
+        if(texto!=null){document.querySelector(`.lista${planeta} l3`).innerHTML=`<p>${texto} <small>${repescagem}%</small></p>`}
     })
     
 }
@@ -279,7 +248,7 @@ function darLike(planeta,linha){
         objeto={signo:l3.signo,texto:l3.texto,likes:l3.likes+1,votos:l3.votos+1}
     }
     const promessa=axios.post(`https://62102e943fd066f7b2307f7d.mockapi.io/${planeta}`,objeto)
-    promessa.then(()=>{console.log('foihhhhh')})
+    promessa.then(()=>{carregarEnvios(planeta,signo)})
 }
 function darDislike(planeta,linha){
     let objeto={}
@@ -293,5 +262,6 @@ function darDislike(planeta,linha){
         objeto={signo:l3.signo,texto:l3.texto,likes:l3.likes,votos:l3.votos+1}
     }
     const promessa=axios.post(`https://62102e943fd066f7b2307f7d.mockapi.io/${planeta}`,objeto)
-    promessa.then(()=>{console.log('foihhhhh')})
+    promessa.then(()=>{carregarEnvios(planeta,signo)})
 }
+

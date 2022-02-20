@@ -1,4 +1,5 @@
 body{
+    font-family: 'Roboto', sans-serif;
     background-color: rgb(121, 73, 150);
     box-sizing: border-box;
     display: flex;flex-direction: column;
@@ -24,6 +25,8 @@ main{
     width: 96%; height: 96%;
     overflow: hidden;
     overflow-y: scroll;
+    display: flex;flex-direction: column;
+    justify-content: space-around;
 }
 section{
     display: flex; flex-direction: column;
@@ -33,7 +36,6 @@ section{
     display: flex;flex-direction: column;
     justify-content: space-evenly;
     align-items: center;
-    border:1px solid white
 }
 .labelSelect{
     display: flex;
@@ -41,13 +43,21 @@ section{
 }
 p{
     color: white;
-    font-size: 30px;
+    font-size: 20px;
+    margin-top: 20px;
+    font-weight: 400;
 }
-
+p small{
+    color: aqua;
+    font-weight: 200;
+    font-size: 15px;
+}
 h1{
     color: white;
     font-size: 30px;
+    margin-bottom: 5px;
 }
+
 .inicial{
     background-color: aqua;
     height: 90%;
@@ -94,4 +104,7 @@ h1{
 }
 .contribua button ion-icon{
     color: white;
+}
+section ul{
+    width: 35vw;
 }
