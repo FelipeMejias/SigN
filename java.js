@@ -6,11 +6,17 @@ let usuarioProprio=null;
 let l1=null;
 let l2=null;
 let l3=null;
-let listaEsp=[]
 
-const paginaCadastro=document.querySelector('.inicial')
-const paginaUsuarios=document.querySelector('.principal')
-const paginaSignos=document.querySelector('.signosUsuario')
+function navegar(nivel){
+    if(nivel==3){paginaPlanetas.classList.add('some');paginaSignos.classList.remove('some')}
+    if(nivel==2){paginaSignos.classList.add('some');paginaUsuarios.classList.remove('some')}
+    
+    
+}
+
+const paginaCadastro=document.querySelector('.paginaCadastro')
+const paginaUsuarios=document.querySelector('.paginaUsuarios')
+const paginaSignos=document.querySelector('.paginaSignos')
 const paginaPlanetas=document.querySelector('.paginaPlanetas')
 jaSouAlguem()
 
@@ -36,14 +42,14 @@ function printarOpcoes(){
     for(let j=0;j<planetas.length;j++){
     paginaCadastro.innerHTML+=`
     <div class="labelSelect">
-                <label><p>${planetas[j]}:</p></label>
-                <select class="${planetas[j]}">
+                <label><h2>${planetas[j]}:</h2></label>
+                <select class="${planetas[j]} decoracaoCadastro">
                     <option value="Não Sei" selected>Não sei</option>
                 </select>
                 </div>
     `
     }
-    paginaCadastro.innerHTML+=`<button onclick="salvarUsuario()">Pronto!</button>`
+    paginaCadastro.innerHTML+=`<button onclick="salvarUsuario()" class="decoracaoCadastro"><ion-icon name="checkmark-outline"></ion-icon></button>`
     const inputsOpcao=document.querySelectorAll('select')
     inputsOpcao.forEach(
         (select)=>{
@@ -60,7 +66,7 @@ function salvarUsuario(){
     const asc =document.querySelector('.Ascendente')
     const lua =document.querySelector('.Lua')
     const usuario={
-        nome: document.querySelector('.inicial input').value,
+        nome: document.querySelector('.paginaCadastro input').value,
         sol: sol.options[sol.selectedIndex].value,
         ascendente: asc.options[asc.selectedIndex].value,
         lua: lua.options[lua.selectedIndex].value
@@ -88,12 +94,21 @@ function printarUsuarios(){
         document.querySelector('.usuarios').innerHTML+=`
             <li onclick="(buscarUsuario(${usuario.id}))">
                 <ion-icon name="person-circle-outline"></ion-icon>
-                <h1>${usuario.nome}</h1>
+                <h2>${usuario.nome}</h2>
             </li>
         `
     })
 }
-
+/*
+function printarMeuUsuario(){
+    document.querySelector('.usuarios').innerHTML+=`
+            <li class="azulUsuario" onclick="(buscarUsuario(${usuario.id}))">
+                <ion-icon name="person-circle-outline"></ion-icon>
+                <h2>${usuario.nome}</h2>
+            </li>
+        `
+}
+*/
 function buscarUsuario(id){
     usuarios.forEach((usuario)=>{
         if(usuario.id==id){
@@ -108,11 +123,12 @@ function printarPlanetasUsuario(objeto){
     paginaSignos.classList.remove('some')
     for(let k=0;k<signos.length;k++){
         if(objeto.sol==signos[k]){
-        paginaSignos.innerHTML+=`
+        paginaSignos.innerHTML=`
+        <button class="voltar" onclick="navegar(2)"><ion-icon name="arrow-back-outline"></ion-icon></button>
             <div onclick="abrirPlaneta('Sol','${objeto.sol}',0)" class="planeta">
                 <section>
                     <h1>SOL</h1>
-                    <h1>em</h1>
+                    <h2>em</h2>
                     <h1>${signos[k]}</h1>
                 </section>
                 <div class="bolaPlaneta desenhoSol"></div>
@@ -127,7 +143,7 @@ function printarPlanetasUsuario(objeto){
             <div onclick="abrirPlaneta('Ascendente','${objeto.ascendente}',1)" class="planeta">
                 <section>
                     <h1>ASCENDENTE</h1>
-                    <h1>em</h1>
+                    <h2>em</h2>
                     <h1>${signos[k]}</h1>
                 </section>
                 <div class="bolaPlaneta desenhoAscendente"></div>
@@ -142,7 +158,7 @@ function printarPlanetasUsuario(objeto){
             <div onclick="abrirPlaneta('Lua','${objeto.lua}',2)"class="planeta">
                 <section>
                     <h1>LUA</h1>
-                    <h1>em</h1>
+                    <h2>em</h2>
                     <h1>${signos[k]}</h1>
                 </section>
                 <div class="bolaPlaneta desenhoLua"></div>
@@ -157,28 +173,29 @@ function abrirPlaneta(planeta,signo,i){
     paginaSignos.classList.add('some')
     paginaPlanetas.classList.remove('some')
     paginaPlanetas.innerHTML=`
+    <button class="voltar" onclick="navegar(3)"><ion-icon name="arrow-back-outline"></ion-icon></button>
         <section>
             <h1>${planeta}</h1>
-            <h1>em</h1>
+            <h2>em</h2>
             <h1>${signo}</h1>
             <div class="bolaPlaneta desenho${planeta}"></div>
             </section>
-        
+            
         <section>
-                    <h1>${frases[i]}</h1>
+                    <p class="frase">${frases[i]}</p>
                     <ul class="lista${planeta}">
                         <l1></l1>
-                        <div class="botoesConcorda">
+                        <div class="botoesConcorda naoClica">
                             <button onclick="darLike('${planeta}',1)" class="like"><ion-icon name="thumbs-up-outline"></ion-icon></button>
                             <button onclick="darDislike('${planeta}',1)" class="dislike"><ion-icon name="thumbs-down-outline"></ion-icon></button>
                         </div>
                         <l2></l2>
-                        <div class="botoesConcorda">
+                        <div class="botoesConcorda naoClica">
                             <button onclick="darLike('${planeta}',2)" class="like"><ion-icon name="thumbs-up-outline"></ion-icon></button>
                             <button onclick="darDislike('${planeta}',2)" class="dislike"><ion-icon name="thumbs-down-outline"></ion-icon></button>
                         </div>
                         <l3></l3>
-                        <div class="botoesConcorda">
+                        <div class="botoesConcorda naoClica">
                             <button onclick="darLike('${planeta}',3)" class="like"><ion-icon name="thumbs-up-outline"></ion-icon></button>
                             <button onclick="darDislike('${planeta}',3)" class="dislike"><ion-icon name="thumbs-down-outline"></ion-icon></button>
                         </div>
@@ -192,8 +209,13 @@ function abrirPlaneta(planeta,signo,i){
     carregarEnvios(planeta,signo)
 }
 
+function habilitarLikes(){
+    const listaBotoes=document.querySelectorAll('.botoesConcorda')
+    listaBotoes.forEach((botao)=>{botao.classList.toggle('naoClica')})
+}
 
 function enviar(planeta,signo){
+    habilitarLikes()
     const valor=document.querySelector(`.input${planeta}`).value
     const objeto={
         signo:signo,
@@ -207,8 +229,9 @@ function enviar(planeta,signo){
 
 function carregarEnvios(planeta,signo){
     const promessa=axios.get(`https://62102e943fd066f7b2307f7d.mockapi.io/${planeta}`)
-    listaEsp=[]//colocar o const depois
+    const listaEsp=[]
     promessa.then((resposta)=>{
+        habilitarLikes()
         const lista=resposta.data
         lista.forEach((objeto)=>{if(objeto.signo==signo){listaEsp.push(objeto)}})
         maisVotado=0
@@ -241,6 +264,7 @@ function carregarEnvios(planeta,signo){
 function darLike(planeta,linha){
     let objeto={}
     let id=null
+    habilitarLikes()
     if(linha==1){
         objeto={signo:l1.signo,texto:l1.texto,likes:(l1.likes+1),votos:(l1.votos+1)}
         id=l1.id
@@ -260,6 +284,7 @@ function darLike(planeta,linha){
 function darDislike(planeta,linha){
     let objeto={}
     let id=null
+    habilitarLikes()
     if(linha==1){
         objeto={signo:l1.signo,texto:l1.texto,likes:l1.likes,votos:(l1.votos + 1)}
         id=l1.id

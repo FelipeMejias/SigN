@@ -2,61 +2,92 @@ body{
     font-family: 'Roboto', sans-serif;
     background-color: rgb(121, 73, 150);
     box-sizing: border-box;
-    display: flex;flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    color:white;
+    display: flex; flex-direction: column; justify-content: center; align-items: center;
 }
 header{
-    height: 8vh; width: 100%;
+    height: 9vh; width: 100%;
     position: fixed; top:0;
     background-color: rgb(114, 40, 156);
 }
 main{
     width: 92vw; height:86vh;
-    margin-top: 11vh;
+    margin-top: 11.1vh;
     background-color: black;
     border-radius: 1vh; border:0.3vh solid rgb(20, 17, 207);
-    display: flex;flex-direction: column;
-    align-items: center;
-    justify-content: center;
-
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
 }
 .imagenzona{
-    width: 96%; height: 96%;
-    overflow: hidden;
-    overflow-y: scroll;
-    display: flex;flex-direction: column;
-    justify-content: space-around;
+    width: 96%; height: 95%;
+    overflow: hidden; overflow-y: scroll;
+    display: flex; flex-direction: column; justify-content: space-around;align-items: center;
+    
 }
 section{
-    display: flex; flex-direction: column;
-    align-items: center;
+    display: flex; flex-direction: column; align-items: center; width: 94%;
 }
-.planeta{
-    display: flex;flex-direction: column;
-    justify-content: space-evenly;
-    align-items: center;
-}
+
+
+/*  PAGINA CADASTRO  */
+
 .labelSelect{
     display: flex;
     justify-content: space-between;
     width: 100%;
     align-items: center;
-    
 }
-.labelSelect p{
-    font-size: 30px;
-
+.paginaCadastro{
+    width: 90%;
+    display: flex; flex-direction: column; justify-content: space-evenly; align-items: center;
 }
-.labelSelect select{
+.paginaCadastro button{
+    width: 70px;height:70px;border-radius: 50%;
+}
+.paginaCadastro button ion-icon{font-size: 45px;color: rgb(4, 218, 4);}
+.decoracaoCadastro{
     height: 35px;
     background-color: #72289C;
-    color: white;
     border: 2px solid #1411CF;
     border-radius: 5px;
+    color: white;
+}
+
+
+/*  PAGINA USUARIOS  */
+
+.paginaUsuarios{
+    overflow: hidden;
+    overflow-y: scroll;
+    display: flex; justify-content: flex-start;
+}
+.usuarios{
+    display: flex;flex-wrap: wrap;
+}
+.usuarios li{
+    width: 120px;
+    height: 100px;
+    display: flex;flex-direction: column;align-items: center;
+}
+.usuarios li ion-icon{
+    font-size: 30px;
+    color: yellow;
+}
+
+/*  PAGINA SIGNOS  */
+.paginaSignos{height: 95%;}
+.planeta{
+    display: flex; flex-direction: column; justify-content: space-evenly; align-items: center;
+}
+h1{
+    font-size: 30px;
+    margin:5px
+}
+
+/*  PAGINA PLANETA  */
+h2{
+    font-size: 25px;
 }
 p{
-    color: white;
     font-size: 20px;
     margin-top: 20px;
     font-weight: 400;
@@ -66,76 +97,49 @@ p small{
     font-weight: 200;
     font-size: 15px;
 }
-h1{
-    color: white;
-    font-size: 30px;
-    margin-bottom: 5px;
+.frase{margin-bottom: 30px;}
+.botoesConcorda {
+    margin-bottom: 20px;
+    margin-top: 5px;
 }
-
-.inicial{
-    height: 90%;
-    width: 60%;
-    display: flex;flex-direction: column;
-    justify-content: space-evenly;
-    align-items: center;
-}
-.inicial input{
-    height: 35px;
-    background-color: #72289C;
-    color: white;
-    border: 2px solid #1411CF;
-    border-radius: 5px;
-}
-.principal{
-    overflow: hidden;
-    overflow-y: scroll;
-}
-.usuarios{
-    display: flex;flex-wrap: wrap;
-}
-.usuarios li{
-    width: 100px;
-    height: 100px;
-    display: flex;flex-direction: column;
-    align-items: center;
-}
-.usuarios li ion-icon{
-    font-size: 30px;
-    color: yellow;
-}
-.inicial button{
-    width: 30%;
-    height: 35px;
-    background-color: #72289C;
-    color: white;
-    border: 2px solid #1411CF;
-    border-radius: 5px;
-}
-
-
-.some{display: none;}
-
 .botoesConcorda button{
     background-color: black;
     border: 0;
 }
 .like{color: green;}
 .dislike{color:red}
-
+.contribua{display: flex;width: 94%;justify-content: center;}
 .contribua input{
     background-color: black;
     border: 1px solid white;
-    color:white;
-    width:50vw;height: 35px;
+    width:calc(100% - 30px);height: 35px;
+    color: white;
 }
 .contribua button{
     background-color: black;
-    border:0
+    border:0;margin-left:2px
 }
 .contribua button ion-icon{
-    color: white;
     font-size: 30px;
+    color: white;
 }
 section ul{
-    width: 35vw;
+    width: 100%;
 }
+.voltar{
+    position: fixed;
+    top:0;left:0;
+    width: 9vh;
+    height: 9vh;
+    background-color: #72289C;
+    border: 0;
+}
+.voltar ion-icon{
+    font-size: 40px;
+    color: white;
+}
+
+
+/*  AUXILIARES  */
+.some{display: none;}
+.naoClica{pointer-events: none;}
