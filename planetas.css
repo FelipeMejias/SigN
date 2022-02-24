@@ -1,7 +1,6 @@
 .bolaPlaneta{
     width: 40px; height: 40px;
     border-radius: 50%;
-    margin-bottom: 25px;
 }
 
 .desenhoSol{
@@ -13,3 +12,4 @@
 .desenhoLua{
     background-color: white; border: 10px solid grey
 }
+img{height: 70px;}
