@@ -23,7 +23,7 @@ jaSouAlguem()
 function jaSouAlguem(){
     quemSou()
     if(usuarioProprio!=null){
-        carregarUsuarios(usuarioProprio.nome)
+        carregarUsuarios()
         paginaUsuarios.classList.remove('some')
 
     }else{
@@ -61,6 +61,7 @@ function printarOpcoes(){
         }
     )
 }
+
 function salvarUsuario(){
     const sol =document.querySelector('.Sol')
     const asc =document.querySelector('.Ascendente')
@@ -92,23 +93,14 @@ function carregarUsuarios(){
 function printarUsuarios(){
     usuarios.forEach((usuario)=>{
         document.querySelector('.usuarios').innerHTML+=`
-            <li onclick="(buscarUsuario(${usuario.id}))">
+            <li onclick="buscarUsuario(${usuario.id})">
                 <ion-icon name="person-circle-outline"></ion-icon>
                 <h2>${usuario.nome}</h2>
             </li>
         `
     })
 }
-/*
-function printarMeuUsuario(){
-    document.querySelector('.usuarios').innerHTML+=`
-            <li class="azulUsuario" onclick="(buscarUsuario(${usuario.id}))">
-                <ion-icon name="person-circle-outline"></ion-icon>
-                <h2>${usuario.nome}</h2>
-            </li>
-        `
-}
-*/
+
 function buscarUsuario(id){
     usuarios.forEach((usuario)=>{
         if(usuario.id==id){
@@ -218,10 +210,8 @@ function desabilitarLikes(botao){
     else{document.querySelectorAll('.botoesConcorda').forEach((botao)=>{if(!botao.classList.contains('naoclica')){botao.classList.add('naoClica')}})}
 }
 
-
-
 function enviar(planeta,signo){
-    const valor=document.querySelector(`.input${planeta}`).value
+    let valor=document.querySelector(`.input${planeta}`).value
     if(valor!=''){
     desabilitarLikes('todos')
     const objeto={
@@ -230,7 +220,7 @@ function enviar(planeta,signo){
         likes:1,
         votos:1
     }
-    valor=''
+    document.querySelector(`.input${planeta}`).value=''
     const promessa=axios.post(`https://62102e943fd066f7b2307f7d.mockapi.io/${planeta}`,objeto)
     promessa.then(()=>{carregarEnvios(planeta,signo)})
 }
@@ -287,7 +277,6 @@ function carregarEnvios(planeta,signo){
             habilitarLikes('b3')
         }
     })
-    
 }
 
 function darLike(planeta,linha){
@@ -306,9 +295,11 @@ function darLike(planeta,linha){
         objeto={signo:l3.signo,texto:l3.texto,likes:(l3.likes+1),votos:(l3.votos+1)}
         id=l3.id
     }
-    axios.delete(`https://62102e943fd066f7b2307f7d.mockapi.io/${planeta}/${id}`)
     const promessa=axios.post(`https://62102e943fd066f7b2307f7d.mockapi.io/${planeta}`,objeto)
-    promessa.then(()=>{carregarEnvios(planeta,objeto.signo)})
+    promessa.then(()=>{
+        const promessa2=axios.delete(`https://62102e943fd066f7b2307f7d.mockapi.io/${planeta}/${id}`);
+        promessa2.then(()=>{carregarEnvios(planeta,objeto.signo)})
+    })
 }
 function darDislike(planeta,linha){
     let objeto={}
@@ -326,7 +317,6 @@ function darDislike(planeta,linha){
         objeto={signo:l3.signo,texto:l3.texto,likes:l3.likes,votos:(l3.votos + 1)}
         id=l3.id
     }
-    
     const promessa=axios.post(`https://62102e943fd066f7b2307f7d.mockapi.io/${planeta}`,objeto)
     promessa.then(()=>{
         const promessa2=axios.delete(`https://62102e943fd066f7b2307f7d.mockapi.io/${planeta}/${id}`);
